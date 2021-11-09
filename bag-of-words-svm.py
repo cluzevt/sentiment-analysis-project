@@ -35,7 +35,6 @@ def solve(x,y):
 
 
 df=pd.read_csv('sa_file_processed2.csv', encoding='ISO-8859-1',na_filter=True,na_values='[]', converters={'1': pd.eval})
-df=df.head(12000)
 df.dropna(inplace=True)
 
 vectorizer = CountVectorizer(analyzer=lambda x:x)

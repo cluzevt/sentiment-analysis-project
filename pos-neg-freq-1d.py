@@ -23,7 +23,7 @@ def store_frequency(x,y):
     return dict
 
 def get_dataframe(x,dict):
-    df=pd.DataFrame(columns=['0', '1'])
+    df=pd.DataFrame(columns=['0'])
     for i in x.index:
         pos=0
         neg=0
@@ -32,7 +32,7 @@ def get_dataframe(x,dict):
                 pos=pos+dict[(token,1)]
             if (token,-1) in dict:
                 neg=neg+dict[(token,-1)]
-        df.loc[i]=[pos,-1*neg]
+        df.loc[i]=[pos+neg]
     return df
 
 def solve(df):
@@ -42,10 +42,6 @@ def solve(df):
     X_train, X_test, y_train, y_test= train_test_split(x, y, train_size=0.8, random_state=1)
 
     #print(X_train.head(10))
-
-    #print(X_train.dtypes)
-    #print(y_train.dtypes)
-    #return
 
     dict=store_frequency(X_train,y_train)
     X_train=get_dataframe(X_train,dict)
@@ -64,7 +60,11 @@ def solve(df):
     model.fit(X_train,y_train)
     Y=model.predict(X_test)
 
+    y_test=y_test['0'].tolist()
+
+    print(len(y_test))
     print(y_test)
+    print(len(Y))
     print(Y)
 
     print(confusion_matrix(y_test,Y))

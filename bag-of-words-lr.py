@@ -4,7 +4,6 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-from sklearn import svm
 
 def solve(x,y):
     X_train, X_test, y_train, y_test = train_test_split(x, y, train_size=0.8, random_state=1)
@@ -25,18 +24,18 @@ def solve(x,y):
     y_test.reset_index(inplace=True, drop=True)
 
     #model = LogisticRegression()
-    clf = svm.SVC()
-    clf.fit(X_train, y_train)
-    Y = clf.predict(X_test)
+    model=LogisticRegression(multi_class='multinomial', solver='lbfgs')
+    model.fit(X_train, y_train)
+    Y = model.predict(X_test)
 
 
     print(confusion_matrix(y_test, Y))
     print(accuracy_score(y_test, Y))
 
 
-df=pd.read_csv('sa_file_processed2.csv', encoding='ISO-8859-1',na_filter=True,na_values='[]', converters={'1': pd.eval})
-df=df.head(12000)
+df=pd.read_csv('sa_file_processed1.csv', encoding='ISO-8859-1',na_filter=True,na_values='[]', converters={'1': pd.eval})
 df.dropna(inplace=True)
+df=df.head(8000)
 
 vectorizer = CountVectorizer(analyzer=lambda x:x)
 #arr=vectorizer.fit_transform(df['1'].tolist()).toarray()

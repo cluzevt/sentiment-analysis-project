@@ -8,6 +8,8 @@ from sklearn.model_selection import  train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.neighbors import KNeighborsClassifier
 
 def store_frequency(x,y):
     #we need to get dataframe, where first value correspond to number of positive tweets and
@@ -43,10 +45,6 @@ def solve(df):
 
     #print(X_train.head(10))
 
-    #print(X_train.dtypes)
-    #print(y_train.dtypes)
-    #return
-
     dict=store_frequency(X_train,y_train)
     X_train=get_dataframe(X_train,dict)
     X_test=get_dataframe(X_test,dict)
@@ -60,12 +58,12 @@ def solve(df):
     y_train.reset_index(inplace=True,drop=True)
     y_test.reset_index(inplace=True,drop=True)
 
-    model=LogisticRegression()
+    model=KNeighborsClassifier(n_neighbors=300)
     model.fit(X_train,y_train)
     Y=model.predict(X_test)
 
-    print(y_test)
-    print(Y)
+    #print(y_test)
+    #print(Y)
 
     print(confusion_matrix(y_test,Y))
     print(accuracy_score(y_test,Y))
