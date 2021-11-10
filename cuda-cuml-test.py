@@ -53,7 +53,7 @@ def solve(x, y):
 df = pd.read_csv('sa_file_processed1.csv', encoding='ISO-8859-1', na_filter=True, na_values='[]',
                  converters={"1": literal_eval})
 df.dropna(inplace=True)
-df = df.head(100)
+df = df.head(10000)
 vectorizer = CountVectorizer(analyzer=lambda x: x)
 # arr=vectorizer.fit_transform(df['1'].tolist()).toarray()
 # lis=[]
@@ -76,11 +76,11 @@ x[cols] = x[cols].apply(pd.to_numeric, errors='coerce')
 cols = y.columns
 y[cols] = y[cols].apply(pd.to_numeric, errors='coerce')
 
-x = cudf.DataFrame.from_pandas(x)
-y = cudf.DataFrame.from_pandas(y)
+x = cudf.DataFrame.from_pandas(x).astype('float64')
+y = cudf.DataFrame.from_pandas(y).astype('float64')
 
-x = x.astype('float64')
-y = y.astype('float64')
+# x=x.astype('float64')
+# y=y.astype('float64')
 # print(x.head(2))
 
 print("toward solving")

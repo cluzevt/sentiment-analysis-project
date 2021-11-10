@@ -4,6 +4,8 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
+from ast import literal_eval
+
 
 def solve(x,y):
     X_train, X_test, y_train, y_test = train_test_split(x, y, train_size=0.8, random_state=1)
@@ -33,9 +35,10 @@ def solve(x,y):
     print(accuracy_score(y_test, Y))
 
 
-df=pd.read_csv('sa_file_processed1.csv', encoding='ISO-8859-1',na_filter=True,na_values='[]', converters={'1': pd.eval})
+#df=pd.read_csv('sa_file_processed1.csv', encoding='ISO-8859-1',na_filter=True,na_values='[]', converters={'1': pd.eval})
+df=pd.read_csv('sa_file_processed1.csv', encoding='ISO-8859-1',na_filter=True,na_values='[]', converters={"1": literal_eval})
 df.dropna(inplace=True)
-
+df=df.head(10000)
 vectorizer = CountVectorizer(analyzer=lambda x:x)
 #arr=vectorizer.fit_transform(df['1'].tolist()).toarray()
 #lis=[]
