@@ -1,6 +1,6 @@
 from sklearn.feature_extraction.text import CountVectorizer
 import pandas as pd
-from cuml.linear_model import LogisticRegression
+from cuml import svm
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
@@ -27,7 +27,7 @@ def solve(x, y):
     y_test.reset_index(inplace=True, drop=True)
 
     # model = LogisticRegression()
-    model = LogisticRegression()
+    model = svm.SVC()
     model.fit(X_train, y_train)
     Y = model.predict(X_test)
 
@@ -48,12 +48,12 @@ def solve(x, y):
     print(confusion_matrix(y_test, Y))
     print(accuracy_score(y_test, Y))
 
-
+cudf.set_allocator("managed")
 # df=pd.read_csv('sa_file_processed1.csv', encoding='ISO-8859-1',na_filter=True,na_values='[]', converters={'1': pd.eval})
 df = pd.read_csv('sa_file_processed1.csv', encoding='ISO-8859-1', na_filter=True, na_values='[]',
                  converters={"1": literal_eval})
 df.dropna(inplace=True)
-df = df.head(10000)
+df = df.head(14000)
 vectorizer = CountVectorizer(analyzer=lambda x: x)
 # arr=vectorizer.fit_transform(df['1'].tolist()).toarray()
 # lis=[]
