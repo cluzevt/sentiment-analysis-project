@@ -15,6 +15,6 @@ def  df_modification():
         #print(i)
         df['1'][i]=preprocess.preprocess_tweet(df['1'][i])
     #print(df.head(10))
-    df.to_csv('../dataset_modified_2_1/data.csv')
+    df.to_csv('../dataset_modified_2_1/data-2-grams.csv')
 
 df_modification()
