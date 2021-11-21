@@ -66,13 +66,13 @@ def solve(df):
     md4=KNeighborsClassifier(n_neighbors=300)
     md5=svm.SVC()
 
-    model=VotingClassifier(estimators=[('lr',md1),('nb',md2),('rf',md3),('kn',md4),('svc',md5)],voting='soft')
+    model=VotingClassifier(estimators=[('lr',md1),('nb',md2),('rf',md3),('kn',md4),('svc',md5)],voting='hard')
 
     model.fit(X_train,y_train)
     Y=model.predict(X_test)
 
-    print(y_test)
-    print(Y)
+    #print(y_test)
+    #print(Y)
 
     print(confusion_matrix(y_test,Y))
     print(accuracy_score(y_test,Y))
