@@ -4,7 +4,7 @@ import  preprocess
 
 
 def  df_modification():
-    df = pd.read_csv('../dataset-2-1.csv')
+    df = pd.read_csv('../dataset-2.csv')
     #df = df.head(100)
     df = df.drop(df.columns[0], axis=1)
     df=shuffle(df)
@@ -15,6 +15,6 @@ def  df_modification():
         #print(i)
         df['1'][i]=preprocess.preprocess_tweet(df['1'][i])
     #print(df.head(10))
-    df.to_csv('../dataset_modified_2_1/data-3-grams.csv')
+    df.to_csv('../dataset_modified_2/data-4-grams.csv')
 
 df_modification()

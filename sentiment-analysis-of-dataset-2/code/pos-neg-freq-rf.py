@@ -53,12 +53,7 @@ def solve(df):
     #result=X_train.head(100)
     #print(result)
 
-    X_train.reset_index(inplace=True, drop=True)
-    X_test.reset_index(inplace=True, drop=True)
-    y_train.reset_index(inplace=True,drop=True)
-    y_test.reset_index(inplace=True,drop=True)
-
-    model=RandomForestClassifier(n_estimators=100,max_depth=10)
+    model=RandomForestClassifier(n_estimators=1000,max_depth=10)
     model.fit(X_train,y_train)
     Y=model.predict(X_test)
 
@@ -72,6 +67,6 @@ def solve(df):
 
 
 
-df=pd.read_csv('sa_file_processed.csv', encoding='ISO-8859-1',na_filter=True,na_values='[]', converters={'1': pd.eval})
+df=pd.read_csv('../dataset_modified_2/data-triplets.csv', encoding='ISO-8859-1',na_filter=True,na_values='[]', converters={'1': pd.eval})
 df.dropna(inplace=True)
 solve(df)

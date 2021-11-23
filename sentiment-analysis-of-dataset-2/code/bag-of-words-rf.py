@@ -33,7 +33,7 @@ def solve(x,y):
     print(accuracy_score(y_test, Y))
 
 
-df=pd.read_csv('sa_file_processed2.csv', encoding='ISO-8859-1',na_filter=True,na_values='[]', converters={'1': pd.eval})
+df=pd.read_csv('../dataset_modified_2/data-triplets.csv', encoding='ISO-8859-1',na_filter=True,na_values='[]', converters={'1': pd.eval})
 df.dropna(inplace=True)
 
 vectorizer = CountVectorizer(analyzer=lambda x:x)

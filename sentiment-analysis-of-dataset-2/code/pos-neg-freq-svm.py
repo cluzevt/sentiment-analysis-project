@@ -71,6 +71,6 @@ def solve(df):
 
 
 
-df=pd.read_csv('sa_file_processed.csv', encoding='ISO-8859-1',na_filter=True,na_values='[]', converters={'1': pd.eval})
+df=pd.read_csv('../dataset_modified_2/data-triplets.csv', encoding='ISO-8859-1',na_filter=True,na_values='[]', converters={'1': pd.eval})
 df.dropna(inplace=True)
 solve(df)
