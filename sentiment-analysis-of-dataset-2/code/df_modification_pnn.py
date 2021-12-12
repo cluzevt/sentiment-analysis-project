@@ -20,9 +20,13 @@ def  df_modification():
 
     print(df.head())
 
-
     df=shuffle(df)
     df.reset_index(inplace=True,drop=True)
+
+    df.to_csv('tweet-dataset-2-pnn.csv')
+
+    return
+
     #print(df.head(5))
     # print(list(df))
     for i in df.index:
